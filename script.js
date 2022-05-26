@@ -1,4 +1,5 @@
 const gridContainer = document.querySelector('.grid-container');
+const reset = document.querySelector('.reset')
 
 let gridRows = '';
 let gridCount = 0;
@@ -33,9 +34,21 @@ function drawOnGrid() {
     });
 }
 
+function resetGrid() {
+    const gridItems = document.querySelectorAll('.grid-item');
+    
+    gridItems.forEach((gridItem) => {
+        gridItem.style.backgroundColor = 'white';
+    });
+}
+
 function runProgram() {
     createGrid();
     drawOnGrid();
 }
+
+reset.addEventListener('click', () => {
+    resetGrid();
+});
 
 runProgram();
