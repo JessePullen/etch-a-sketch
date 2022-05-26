@@ -18,7 +18,6 @@ function createGrid() {
             const gridItem = document.createElement('div');
             gridItem.classList.add('grid-item-' + gridCount);
             gridItem.classList.add('grid-item');
-            gridItem.textContent = gridCount;
             gridContainer.appendChild(gridItem);
         }    
     }
@@ -38,10 +37,17 @@ function removeGrid() {
 //Adds event listener to all grid items created. Uses class applied in createGrid.
 function drawOnGrid() {
     const gridItems = document.querySelectorAll('.grid-item');
-
+    
     gridItems.forEach((gridItem) => {
-        gridItem.addEventListener('mouseover', () => {
-            gridItem.style.backgroundColor = 'black';
+        gridItem.addEventListener('mouseover', (e) => {
+            opacity = e.target.style.opacity;
+            
+            if (opacity == '') {
+                opacity = 0.1;
+            }
+            
+            e.target.style.opacity = parseFloat(opacity) + 0.175;
+            e.target.style.backgroundColor = 'black';
         });
     });
 }
@@ -51,7 +57,8 @@ function resetGrid() {
     const gridItems = document.querySelectorAll('.grid-item');
     
     gridItems.forEach((gridItem) => {
-        gridItem.style.backgroundColor = 'white';
+        gridItem.style.backgroundColor = '';
+        gridItem.style.opacity = '';
     });
 }
 

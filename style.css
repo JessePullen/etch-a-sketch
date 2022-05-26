@@ -1,10 +1,9 @@
 .grid-container {
     display: grid;
-    grid-auto-rows: 50px;
-    grid-auto-columns: 50px;
-    width: 960px;
+    height: 800px;
+    width: 800px;
 }
 
 .grid-item {
-    
+    border: solid black 1px;
 }
