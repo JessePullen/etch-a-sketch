@@ -55,6 +55,15 @@ function resetGrid() {
     });
 }
 
+//Repeatedly prompts user if number not in specified range or input is not a number.
+function getWidth() {
+    gridWidth = 0;
+
+    while (gridWidth < 1 || gridWidth > 100 || isNaN(gridWidth)) {
+        gridWidth = prompt('How many rows and columns do you want? (1 - 100)');
+    }
+}
+
 //Initial grid creation and ability to draw on the grid.
 function runProgram() {
     createGrid();
@@ -67,7 +76,7 @@ reset.addEventListener('click', () => {
 
 //Takes input for size of new grid, clears grid and creates new grid.
 changeSize.addEventListener('click', () => {
-    gridWidth = prompt('How many rows and columns do you want?');
+    getWidth();
     removeGrid();
     runProgram();
 });
