@@ -33,5 +33,9 @@ function drawOnGrid() {
     });
 }
 
-createGrid();
-drawOnGrid();
+function runProgram() {
+    createGrid();
+    drawOnGrid();
+}
+
+runProgram();
