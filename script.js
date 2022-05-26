@@ -14,6 +14,7 @@ let drawType = 'gradient';
 function createGrid() {
     for (let i = 0; i < gridWidth; i++) {
         gridRows += ' auto';
+
         gridContainer.style.gridTemplateColumns = gridRows;
 
         for (let j = 0; j < gridWidth; j++) {
@@ -30,6 +31,7 @@ function createGrid() {
 function removeGrid() {
     gridCount = 0;
     gridRows = '';
+
     const gridItems = document.querySelectorAll('.grid-item');
 
     gridItems.forEach((gridItem) => {
@@ -42,26 +44,25 @@ function drawOnGrid() {
     const gridItems = document.querySelectorAll('.grid-item');
 
     gridItems.forEach((gridItem) => {
-        if (drawType == 'gradient') {
-            gridItem.addEventListener('mouseover', (e) => {
-                let opacity = e.target.style.opacity;
+        gridItem.addEventListener('mouseover', () => {
+            let opacity = gridItem.style.opacity;
+            if (opacity == '') {
+                opacity = 0.2;
+            }
 
-                if (opacity == '') {
-                    opacity = 0.1;
-                }
-                e.target.style.opacity = parseFloat(opacity) + 0.175;
-                e.target.style.backgroundColor = 'black';
-            });       
-        } else {
-            gridItem.addEventListener('mouseover', (e) => {
-                e.target.style.opacity = 1;
-                e.target.style.backgroundColor = getRandomColour();
-            });
-        } 
+            if (drawType == 'gradient') {
+                gridItem.style.backgroundColor = 'black';
+                gridItem.style.opacity = parseFloat(opacity) + 0.2;
+            } else {
+                gridItem.style.opacity = 1;
+                gridItem.style.backgroundColor = getRandomColour();
+            }
+        });
     });
 }
 
-//
+
+//Randomly generates a number in hexadecimal and converts to string so it can be used as a CSS style colour.
 function getRandomColour() {
     let maxHex = 0xFFFFFF;
     let randomNumber = Math.random() * maxHex;
@@ -107,12 +108,10 @@ changeSize.addEventListener('click', () => {
 
 gradient.addEventListener('click', () => {
     drawType = 'gradient';
-    drawOnGrid();
 });
 
 random.addEventListener('click', () => {
     drawType = 'random';
-    drawOnGrid();
 });
 
 runProgram();
