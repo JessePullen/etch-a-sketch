@@ -15,10 +15,23 @@ function createGrid() {
             gridCount++
             const gridItem = document.createElement('div');
             gridItem.classList.add('grid-item-' + gridCount);
+            gridItem.classList.add('grid-item');
             gridItem.textContent = gridCount;
             gridContainer.appendChild(gridItem);
         }    
     }
 }
 
+//Adds event listener to all grid items created. Uses class applied in createGrid.
+function drawOnGrid() {
+    const gridItems = document.querySelectorAll('.grid-item');
+
+    gridItems.forEach((gridItem) => {
+        gridItem.addEventListener('mouseover', () => {
+            gridItem.style.backgroundColor = 'black';
+        });
+    });
+}
+
 createGrid();
+drawOnGrid();
