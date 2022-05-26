@@ -1,5 +1,6 @@
 const gridContainer = document.querySelector('.grid-container');
 const reset = document.querySelector('.reset')
+const changeSize = document.querySelector('.change-size')
 
 let gridRows = '';
 let gridCount = 0;
@@ -23,6 +24,17 @@ function createGrid() {
     }
 }
 
+//Resets grid variables for a clean new grid. Removes all grid items.
+function removeGrid() {
+    gridCount = 0;
+    gridRows = '';
+    const gridItems = document.querySelectorAll('.grid-item');
+
+    gridItems.forEach((gridItem) => {
+        gridContainer.removeChild(gridItem);
+    });
+}
+
 //Adds event listener to all grid items created. Uses class applied in createGrid.
 function drawOnGrid() {
     const gridItems = document.querySelectorAll('.grid-item');
@@ -34,6 +46,7 @@ function drawOnGrid() {
     });
 }
 
+//Resets grid items to white
 function resetGrid() {
     const gridItems = document.querySelectorAll('.grid-item');
     
@@ -42,6 +55,7 @@ function resetGrid() {
     });
 }
 
+//Initial grid creation and ability to draw on the grid.
 function runProgram() {
     createGrid();
     drawOnGrid();
@@ -49,6 +63,13 @@ function runProgram() {
 
 reset.addEventListener('click', () => {
     resetGrid();
+});
+
+//Takes input for size of new grid, clears grid and creates new grid.
+changeSize.addEventListener('click', () => {
+    gridWidth = prompt('How many rows and columns do you want?');
+    removeGrid();
+    runProgram();
 });
 
 runProgram();
