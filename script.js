@@ -3,6 +3,7 @@ const reset = document.querySelector('.reset');
 const changeSize = document.querySelector('.change-size');
 const gradient = document.querySelector('.gradient');
 const random = document.querySelector('.random');
+gradient.classList.add('active');
 
 let gridRows = '';
 let gridCount = 0;
@@ -14,7 +15,6 @@ let drawType = 'gradient';
 function createGrid() {
     for (let i = 0; i < gridWidth; i++) {
         gridRows += ' auto';
-
         gridContainer.style.gridTemplateColumns = gridRows;
 
         for (let j = 0; j < gridWidth; j++) {
@@ -31,7 +31,6 @@ function createGrid() {
 function removeGrid() {
     gridCount = 0;
     gridRows = '';
-
     const gridItems = document.querySelectorAll('.grid-item');
 
     gridItems.forEach((gridItem) => {
@@ -61,7 +60,6 @@ function drawOnGrid() {
     });
 }
 
-
 //Randomly generates a number in hexadecimal and converts to string so it can be used as a CSS style colour.
 function getRandomColour() {
     let maxHex = 0xFFFFFF;
@@ -89,6 +87,17 @@ function getWidth() {
     }
 }
 
+//Switches class that highlights active draw mode.
+function toggleClass() {
+    if (drawType == 'random') {
+        random.classList.add('active');
+        gradient.classList.remove('active');
+    } else if (drawType == 'gradient') {
+        gradient.classList.add('active');
+        random.classList.remove('active');
+    }
+}
+
 //Initial grid creation and ability to draw on the grid.
 function runProgram() {
     createGrid();
@@ -108,10 +117,12 @@ changeSize.addEventListener('click', () => {
 
 gradient.addEventListener('click', () => {
     drawType = 'gradient';
+    toggleClass()
 });
 
 random.addEventListener('click', () => {
     drawType = 'random';
+    toggleClass()
 });
 
 runProgram();
